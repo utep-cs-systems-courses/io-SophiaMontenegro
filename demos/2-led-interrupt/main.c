@@ -4,9 +4,9 @@
 #include "led.h"
 
 int main(void) {
-  P1DIR |= LEDS;
-  P1OUT &= ~LED_GREEN;
-  P1OUT |= LED_RED;
+  P1DIR |= LEDS;//sets port1 pins as output for LEDS
+  P1OUT &= ~LED_GREEN;//turns off GREEN
+  P1OUT |= LED_RED;//turns on RED
 
   configureClocks();		/* setup master oscillator, CPU & peripheral clocks */
   enableWDTInterrupts();	/* enable periodic interrupt */

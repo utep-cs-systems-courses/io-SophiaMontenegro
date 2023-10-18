@@ -7,7 +7,8 @@ int main(void) {
   P1DIR |= LEDS;
   P1OUT &= ~LED_GREEN;
   P1OUT |= LED_RED;
-
+  // P1OUT &= ~LED_RED;//added
+  
   configureClocks();		/* setup master oscillator, CPU & peripheral clocks */
   enableWDTInterrupts();	/* enable periodic interrupt */
   
@@ -21,9 +22,10 @@ void
 __interrupt_vec(WDT_VECTOR) WDT()	/* 250 interrupts/sec */
 {
   secondCount ++;
-  if (secondCount >= 250) { 	/* once each sec... */
+  if (secondCount >= 100) { 	/* once each sec... */
     secondCount = 0;		/* reset count */
     P1OUT ^= LED_GREEN;		/* toggle green LED */
+    P1OUT ^= LED_RED; //add
   }
 } 
 
