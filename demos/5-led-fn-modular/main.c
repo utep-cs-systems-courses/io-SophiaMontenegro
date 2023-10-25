@@ -26,11 +26,8 @@ void greenControl(int on)
 void redControl(int on)
 {
   if (on) {
-
     P1OUT |= LED_RED;
-
   } else {
-
     P1OUT &= ~LED_RED;
   }
 }
@@ -40,28 +37,30 @@ static int blinkLimitG = 5;   //  state var representing reciprocal of duty cycl
 static int blinkLimitR = 5;
 void blinkUpdate() // called every 1/250s to blink with duty cycle 1/blinkLimit
 {
-  static int blinkCount = 0; // state var representing blink state
-  blinkCount ++;
-  if (blinkCount >= blinkLimit) {
-    blinkCount = 0;
+  static int blinkCountG = 0; // state var representing blink state
+  static int blinkCountR = 0;
+  blinkCountG ++;
+  blinkCountR ++;
+  if (blinkCountG >= blinkLimitG) {
+    blinkCountG = 0;
     greenControl(1);
-    redControl(0);//add
   } else
     greenControl(0);
-    redControl(1); //add
+  if(blinkCountR >= blinkLimitR){
+    blinkCountR = 0;
+    redControl(1);
+  }else
+    redControl(0);
 }
 
 void oncePerSecond() // repeatedly start bright and gradually lower duty cycle, one step/sec
 {
-  blinkLimit ++;  // reduce duty cycle
-  if (blinkLimit >= 8)  // but don't let duty cycle go below 1/7.
-    blinkLimit = 0;
-}
-void reversePerSecond()
-{
-  blinkLimit--;
-  if (blinkLimit < 0)
-    blinkLimit = 0;
+  blinkLimitR ++;  // reduce duty cycle
+  if (blinkLimitR >= 8)  // but don't let duty cycle go below 1/7.
+    blinkLimitR = 0;
+  blinkLimitG --;
+  if(blinkLimitG <= 0)
+    blinkLimitG = 8;
 }
 
 void secondUpdate()  // called every 1/250 sec to call oncePerSecond once per second
@@ -71,7 +70,7 @@ void secondUpdate()  // called every 1/250 sec to call oncePerSecond once per se
   if (secondCount >= 250) { // once each second
     secondCount = 0;
     oncePerSecond();
-    reversePerSecond();//add
+    // reversePerSecond();//add
   } }
 
 //void timeAdvStateMachines() // called every 1/250 sec
