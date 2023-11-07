@@ -13,17 +13,18 @@ int main(void){
   configureClocks();
   led_init();
   enableWDTInterrupts();
-
   P1DIR |= LEDS;
-  P1OUT &= ~LEDS;		/* leds initially off */
+  P1OUT &= ~LEDS;	/* leds initially off */
+
   P1REN |= SWITCHES;		/* enables resistors for switches */
   P1IE |= SWITCHES;		/* enable interrupts from switches */
-  P1OUT |= SWITCHES;		/* pull-ups for switches */
-  P1DIR &= ~SWITCHES;		/* set switches' bits for input */
 
-  or_sr(0x18);  // CPU off, GIE on
+  P1OUT |= SWITCHES;		/* pull-ups for switches */
+/*P1DIR &= ~SWITCHES;		/* set switches' bits for input */
+
+/*or_sr(0x18);  // CPU off, GIE on
 } 
-/*
+
 void
 switch_interrupt_handler()
 {

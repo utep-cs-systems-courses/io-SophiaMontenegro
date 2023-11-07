@@ -16,18 +16,7 @@ int main(void) {
 
 
 // blink state machine
-static int blinkLimit = 5;   //  state var representing reciprocal of duty cycle 
-void blinkUpdate() // called every 1/250s to blink with duty cycle 1/blinkLimit
-{
-  static int blinkCount = 0; // state var representing blink state
-  blinkCount ++;
-  if (blinkCount >= blinkLimit) {
-    blinkCount = 0;
-    greenControl(1);
-  } else
-    greenControl(0);
-    }
-
+static int blinkLimit = 5;
 void oncePerSecond() // repeatedly start bright and gradually lower duty cycle, one step/sec
 {
   blinkLimit ++;  // reduce duty cycle
@@ -46,7 +35,7 @@ void secondUpdate()  // called every 1/250 sec to call oncePerSecond once per se
 
 void timeAdvStateMachines() // called every 1/250 sec
 {
-  blinkUpdate();
+  blinkUpdate(blinkLimit);
   secondUpdate();
 }
 

@@ -1,7 +1,7 @@
 # include <msp430.h>
 # include "led.h"
 
-void blinkUpdate()
+void blinkUpdate(int blinkLimit)
 {
   static int blinkCount = 0; // state var representing blink state
 
