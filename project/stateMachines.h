@@ -1,6 +1,8 @@
 #ifndef stateMachine_included
 #define stateMachine_included
 
-void state_advance();
+//extern unsigned char currState; 
+
+void state_advance(unsigned char currState);
 
 #endif
