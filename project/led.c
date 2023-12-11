@@ -5,12 +5,12 @@
 void led_init()
 {
   P1DIR |= LEDS;// bits attached to leds are output
-  switch_state_changed = 1;
+  // switch_state_changed = 1;
   led_update();
 }
 
 void led_update(){//demo 10
-  if (switch_state_changed) {
+ 
 
     // char ledFlags = 0; /* by default, no LEDs on */
 
@@ -19,6 +19,5 @@ void led_update(){//demo 10
 
     // P1OUT &= (0xff - LEDS) | ledFlags; // clear bits for off leds
     // P1OUT |= ledFlags;         // set bits for on leds
-  }
-  switch_state_changed = 0;
+  P1OUT &= ~LEDS; //off
 }

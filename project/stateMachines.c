@@ -38,5 +38,5 @@ void state_advance(unsigned char currState)
   }
 
   // led_changed = changed;//might need to delete the next two lines
-  led_update();
+  // led_update();
 }

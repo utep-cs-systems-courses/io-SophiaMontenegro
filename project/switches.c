@@ -3,7 +3,10 @@
 #include "stateMachines.h"
 #include "led.h"
 
-char switch_state_down, switch_state_changed; /* effectively boolean */
+int sw1Down = 0;
+int sw2Down = 0;
+int sw3Down = 0;
+int sw4Down = 0; /* effectively boolean */
 static char
 switch_update_interrupt_sense()
 {
@@ -33,26 +36,39 @@ unsigned char
 switch_interrupt_handler()
 {
   char p2val = switch_update_interrupt_sense();  
-  switch_state_changed = 1;
+  // switch_state_changed = 1;
+
+  int prev1 = sw1Down;
+
+  int prev2 = sw2Down;
+
+  int prev3 = sw3Down;
+
+  int prev4 = sw4Down;
+  
+  //check if the button has been pressed
+
+  sw1Down = (p2val & SW1) ? 0 : 1;
+
+  sw2Down = (p2val & SW2) ? 0 : 1;
+
+  sw3Down = (p2val & SW3) ? 0 : 1;
+
+  sw4Down = (p2val & SW4) ? 0 : 1;
 
   unsigned char currState = 0;
-  int switches = 0;
-  switches = p2val & SWITCHES;
 
-  if(switches & SW1){
+  if(prev1 != sw1Down && sw1Down){
     currState = 0;
   }
-  else if(switches & SW2){
+  else if(prev2 != sw2Down && sw2Down){
     currState = 1;
   }
-  else if(switches & SW3){
+  else if(prev3 != sw3Down && sw3Down){
     currState = 2;
   }
-  else if(switches & SW4){
+  else if(prev4 != sw4Down && sw4Down){
     currState = 3;
-  }
-  else{//no button pressed?
-    switch_state_changed = 0;
   }
   led_update();
   // state_advance(currState);

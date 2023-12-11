@@ -10,6 +10,6 @@
 void switch_init();
 unsigned char switch_interrupt_handler();
 
-extern char switch_state_down, switch_state_changed; /* effectively boolean */
-
+extern int sw1Down, sw2Down, sw3Down, sw4Down; /* effectively boolean */
+extern int oddPress1, oddPress2, oddPress3, oddPress4;
 #endif // included
