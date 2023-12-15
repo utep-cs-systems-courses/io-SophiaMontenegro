@@ -1,0 +1,25 @@
+#include "lcdutils.h"
+#include "lccddraw.h"
+
+void
+draw_state_zero()
+{
+  clearScreen(COLOR_SKY_BLUE);
+  //draw cow
+  /** Fill rectangle
+   *  \param colMin Column start
+   *  \param rowMin Row start
+   *  \param width Width of rectangle
+   *  \param height height of rectangle
+   *  \param colorBGR Color of rectangle in BGR
+   */
+  //head
+  fillRectangle(20,50,26,22,COLOR_CHOCOLATE);
+  fillRectangle(23,53,5,5,COLOR_BLACK); //eye one
+  fillRectangle(32, 53, 5, 5, COLOR_BLACK); //eye two
+  fillRectangle(28, 60, 9,8, COLOR_PINK); //nose
+  //body
+
+
+  //feet
+}
